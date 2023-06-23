@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Recipes</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+           th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+
+
+</head>
+
+<body>
+<!--/*@thymesVar id="recipe" type="prat.learning.recipebook.Model.Recipe"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h1 class="panel-title" th:text="${recipe.description}">Recipe Description here</h1>
+                            </div>
+
+                            <div class="col-md-1">
+                                <a class="btn btn-default" href="#"
+                                   th:href="@{'recipe/'+${recipe.id}+ '/image'}" role="button"> Change Image</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Categories:</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <ul>
+                                    <li th:remove="all">category 1</li>
+                                    <li th:remove="all">category 2</li>
+                                    <li th:each="category : ${recipe.category}"
+                                        th:text="${category.getCategoryName()}"> category 3
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="{image sorce not present yet}"
+                                     th:src="@{'/recipe/'+${recipe.id}+'recipeImage'}"
+                                     width="200" height="200">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Preparation Time:</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${(recipe.prepTime)+ ' min'}"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5>Difficulty:</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${recipe.getDifficulty()}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Cooking Time:</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${(recipe.getCookTime()+' min')}"/>
+                            </div>
+                            <div class="col-md-3">
+                                <h5> Servings</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${recipe.serving}"/>
+                            </div>
+                        </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5> Source: </h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p th:text="${recipe.source}"/>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5> URL: </h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><a href="#" th:href="${recipe.url}"></a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li th:remove="all"></li>
+                                        <li th:remove="all"></li>
+                                        <li th:each="ingredient:${recipe.ingredients}"
+                                            th:text="${(ingredient.getAmount())+' '+ingredient.uom.getUom()+'-'
+                                            +ingredient.getDescription()}">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Directions</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p th:text="${recipe.description}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Notes</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p th:text="${recipe.notes.recipeNotes}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
