@@ -1,5 +1,6 @@
 package prat.learning.recipebook.Model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 

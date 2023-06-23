@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<!--/*@thymesVar id="recipes" type="java.util.List"*/-->
+
 <!--/*@thymesVar id="recipe" type="prat.learning.recipebook.Model.Recipe"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
@@ -26,7 +26,7 @@
                     <h1 class="panel-title"> Recipes!!</h1>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+                    <div class="table-responsive">
                         <table class="table table-hover">
                             <thead class="thead-inverse">
                             <tr>
@@ -37,7 +37,7 @@
                                 <th>Delete</th>
                             </tr>
                             </thead>
-                            <tr th:remove="all">
+                           <!-- <tr>
                                 <td>1</td>
                                 <td> Tasty 1</td>
                                 <td><a href="#">View</a></td>
@@ -46,13 +46,13 @@
                                 <td>2</td>
                                 <td> Tasty 2</td>
                                 <td><a href="#">View</a></td>
-                            </tr>
+                            </tr>-->
                             <tr th:each="recipe:${recipes}">
-                                <td th:text="${recipe.id}"><td/>
-                                <td th:text="${recipe.description}"><td/>
-                                <td><a href="#" th:href="@{'/recipe'+${recipe.id}+'/fromController'}">View</a></td>
-                                <td><a href="#" th:href="@{'/recipe'+${recipe.id}+'/fromController'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/recipe'+${recipe.id}+'/fromController'}">Delete</a></td>
+                                <td th:text="${recipe.id}"></td>
+                                <td th:text="${recipe.description}"></td>
+                                <td><a href="#" th:href="@{'/recipe/find/'+${recipe.id}}">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/find/'+${recipe.id}}">Update</a></td>
+                                <td><a href="#" th:href="@{'/recipe/find/'+${recipe.id}}">Delete</a></td>
                             </tr>
                         </table>
                     </div>

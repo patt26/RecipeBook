@@ -5,12 +5,12 @@
     <title>Show Recipes</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
 
     <script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-           th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+           th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 
 
 </head>
@@ -25,12 +25,12 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-3">
-                                <h1 class="panel-title" th:text="${recipe.description}">Recipe Description here</h1>
+                                <h1 class="panel-title" th:text="${recipe.get().description}">Recipe Description here</h1>
                             </div>
 
                             <div class="col-md-1">
                                 <a class="btn btn-default" href="#"
-                                   th:href="@{'recipe/'+${recipe.id}+ '/image'}" role="button"> Change Image</a>
+                                   th:href="@{'recipe/'+${recipe.get().id}+ '/image'}" role="button"> Change Image</a>
                             </div>
                         </div>
                     </div>
@@ -43,14 +43,14 @@
                                 <ul>
                                     <li th:remove="all">category 1</li>
                                     <li th:remove="all">category 2</li>
-                                    <li th:each="category : ${recipe.category}"
+                                    <li th:each="category : ${recipe.get().category}"
                                         th:text="${category.getCategoryName()}"> category 3
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <img src="{image sorce not present yet}"
-                                     th:src="@{'/recipe/'+${recipe.id}+'recipeImage'}"
+                                     th:src="@{'/recipe/'+${recipe.get().id}+'recipeImage'}"
                                      width="200" height="200">
                             </div>
                         </div>
@@ -59,13 +59,13 @@
                                 <h5>Preparation Time:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${(recipe.prepTime)+ ' min'}"></p>
+                                <p th:text="${(recipe.get().prepTime)+ ' min'}"></p>
                             </div>
                             <div class="col-md-3">
                                 <h5>Difficulty:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${recipe.getDifficulty()}"/>
+                                <p th:text="${recipe.get().getDifficulty()}"/>
                             </div>
                         </div>
                         <div class="row">
@@ -73,13 +73,13 @@
                                 <h5>Cooking Time:</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${(recipe.getCookTime()+' min')}"/>
+                                <p th:text="${(recipe.get().getCookTime()+' min')}"/>
                             </div>
                             <div class="col-md-3">
                                 <h5> Servings</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${recipe.serving}"/>
+                                <p th:text="${recipe.get().serving}"/>
                             </div>
                         </div>
                             <div class="row">
@@ -87,13 +87,13 @@
                                     <h5> Source: </h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p th:text="${recipe.source}"/>
+                                    <p th:text="${recipe.get().source}"/>
                                 </div>
                                 <div class="col-md-3">
                                     <h5> URL: </h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p><a href="#" th:href="${recipe.url}"></a></p>
+                                    <p><a href="#" th:href="${recipe.get().url}"></a></p>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                     <ul>
                                         <li th:remove="all"></li>
                                         <li th:remove="all"></li>
-                                        <li th:each="ingredient:${recipe.ingredients}"
+                                        <li th:each="ingredient:${recipe.get().ingredients}"
                                             th:text="${(ingredient.getAmount())+' '+ingredient.uom.getUom()+'-'
                                             +ingredient.getDescription()}">
                                         </li>
@@ -119,7 +119,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p th:text="${recipe.description}"></p>
+                                    <p th:text="${recipe.get().description}"></p>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,8 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p th:text="${recipe.notes.recipeNotes}"></p>
+                                    <p th:if="${recipe.get().notes!=null && recipe.get().notes.recipeNotes!=null}" th:text="${recipe.get().notes.recipeNotes}"></p>
+                                    <p th:unless="${recipe.get().notes!=null && recipe.get().notes.recipeNotes!=null }" th:text="${null}"></p>
                                 </div>
                             </div>
                         </div>
