@@ -1,14 +1,13 @@
 package prat.learning.recipebook.Model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.Objects;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "notes")
+@EqualsAndHashCode(exclude = {"recipe"})
 public class Notes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
