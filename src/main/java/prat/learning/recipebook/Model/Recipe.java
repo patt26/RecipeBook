@@ -1,8 +1,7 @@
 package prat.learning.recipebook.Model;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.id.IntegralDataTypeHolder;
+import lombok.Data;
 
 import java.util.Set;
 
@@ -37,9 +36,7 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> category;
 
-    public void setNotes(Notes notes){
-        this.notes=notes;
-        notes.setRecipe(this);
+    public Recipe() {
     }
 
     public Recipe addIngredient(Ingredient ingredient){
@@ -47,5 +44,6 @@ public class Recipe {
         this.ingredients.add(ingredient);
         return this;
     }
+
 
 }

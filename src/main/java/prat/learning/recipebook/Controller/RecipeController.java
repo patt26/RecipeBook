@@ -1,6 +1,7 @@
 package prat.learning.recipebook.Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,12 +37,15 @@ public class RecipeController {
         model.addAttribute("recipe",new Recipe());
         return "recipe/recipeCreateForm";
    }
+
+   @Transactional
    @PostMapping("recipe")
    public String createNewRecipe(@ModelAttribute("recipe") Recipe recipe){
         Recipe newRecipe=recipeRepository.save(recipe);
         return "redirect:/recipe/find/"+newRecipe.getId();
    }
 
+   @Transactional
    @GetMapping("recipe/update/{id}")
    public String updateRecipe(@PathVariable Long id,Model model){
        Optional<Recipe> updateRecipe=recipeRepository.findById(id);
@@ -57,6 +61,20 @@ public class RecipeController {
         recipeRepository.deleteById(id);
         return "redirect:/";
    }
+
+  /* @Transactional
+   @GetMapping("/recipe/update")
+   public String updateOrSave(@RequestParam(value = "id",required = false) Long id, @ModelAttribute("recipe") Recipe recipe, Model model){
+        if(id!=null){
+            Optional<Recipe> updatedRecipe=recipeRepository.findById(id);
+            if(updatedRecipe.isPresent()){
+                Recipe extraRecipe=updatedRecipe.get();
+                model.addAttribute("recipe",extraRecipe);
+            }
+        }
+        Recipe newRecipe=recipeRepository.save(recipe);
+        return "redirect:/recipe/find/"+newRecipe.getId();
+   }*/
 
 //    @PostMapping("/new")
 //    public Recipe createData(@RequestBody Recipe recipe){
