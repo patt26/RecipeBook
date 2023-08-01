@@ -46,7 +46,7 @@
                             </thead>
                             <tr th:each="ingredients:${recipe.get().ingredients}">
                                 <td th:text="${ingredients.id}"></td>
-                                <td th:text="${ingredients.amount}+' '+${ingredients.uom.getUom()}+' '+${ingredients.description}"></td>
+                                <td th:text="${ingredients.amount}+' '+${ingredients.description}"></td>
                                 <td><a href="#" th:href="@{'/ingredient/find/'+${recipe.id}+${ingredients.id}}">View</a></td>
                                 <td><a href="#" th:href="@{'/ingredient/update/'+${recipe.id}+${ingredients.id}}">Update</a></td>
                                 <td><a href="#" th:href="@{'/ingredient/delete/'+${recipe.id}+${ingredients.id}}">Delete</a></td>
